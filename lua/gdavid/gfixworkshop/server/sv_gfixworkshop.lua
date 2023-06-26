@@ -29,24 +29,24 @@ hook.Add("PlayerSpawn", "gFixWorkshop:AddJetPackOnSpawn", function(ply)
                     ex:Remove()
                     ply:SetNWEntity('Jetted', NULL)
                 else
-                    local jp = ents.Create(v) 
+                    local jp = ents.Create(v)
                     jp:SetSlotName(v)
                     jp:Spawn()
                     jp:Attach(ply)
                     ply.Jetted = jp
                     ply:SetNWEntity('Jetted', jp)
                 end
+            end
 
-                ply:EmitSound('buttons/button14.wav')
+            ply:EmitSound('buttons/button14.wav')
 
-                -- Send the message.
-                if gFixWorkshop.config.JetPackTeamFixMessageSend then
-                    net.Start("gFixWorkshop")
+            -- Send the message.
+            if gFixWorkshop.config.JetPackTeamFixMessageSend then
+                net.Start("gFixWorkshop")
 
-                    net.WriteTable({Color(105, 50, 150), gFixWorkshop.config.GlobalMessage, player:Name() .. gFixWorkshop.config.JetPackTeamAutoEquipFixMessage})
+                net.WriteTable({Color(105, 50, 150), gFixWorkshop.config.GlobalMessage, player:Name() .. gFixWorkshop.config.JetPackTeamAutoEquipFixMessage})
 
-                    net.Send(ply)
-                end
+                net.Send(ply)
             end
         end
     end
