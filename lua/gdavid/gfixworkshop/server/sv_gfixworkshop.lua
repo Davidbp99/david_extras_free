@@ -19,7 +19,7 @@ end)
 
 
 hook.Add("PlayerSpawn", "gFixWorkshop:AddJetPackOnSpawn", function(ply)
-    if gFixWorkshop.config.JetPackTeamFixAutoEquip == true then
+    if gFixWorkshop.config.JetPackTeamFixAutoEquip then
         -- here we grab the team and mk for later
         for k, v in pairs(gFixWorkshop.config.JetPackTeamFixTeams) do
             if ply:Team() == k then
@@ -37,17 +37,17 @@ hook.Add("PlayerSpawn", "gFixWorkshop:AddJetPackOnSpawn", function(ply)
                     ply:SetNWEntity('Jetted', jp)
                 end
             end
+        end
 
-            ply:EmitSound('buttons/button14.wav')
+        ply:EmitSound('buttons/button14.wav')
 
-            -- Send the message.
-            if gFixWorkshop.config.JetPackTeamFixMessageSend then
-                net.Start("gFixWorkshop")
+        -- Send the message.
+        if gFixWorkshop.config.JetPackTeamFixMessageSend then
+            net.Start("gFixWorkshop")
 
-                net.WriteTable({Color(105, 50, 150), gFixWorkshop.config.GlobalMessage, player:Name() .. gFixWorkshop.config.JetPackTeamAutoEquipFixMessage})
+            net.WriteTable({Color(105, 50, 150), gFixWorkshop.config.GlobalMessage, player:Name() .. gFixWorkshop.config.JetPackTeamAutoEquipFixMessage})
 
-                net.Send(ply)
-            end
+            net.Send(ply)
         end
     end
 end)
